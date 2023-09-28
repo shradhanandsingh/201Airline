@@ -1,0 +1,18 @@
+.ViewFareBtn {
+    border: 1px solid #008cff;
+    border-radius: 96px;
+    color: #008cff;
+    background: #daebff;
+    font-weight: 700;
+    font-size: calc(var(--font-scale, 1)*13px);
+    position: relative;
+    padding: 0 8px;
+    height: 31px;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 120px;
+    white-space: nowrap;
+}
+.css-1wvnaxz-MuiTableCell-root.MuiTableCell-head {
+    white-space: nowrap;
+}

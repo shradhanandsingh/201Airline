@@ -1,0 +1,41 @@
+.container {
+    position: absolute;
+    top: 130px;
+    right: 2em;
+    display: grid;
+    grid-template-columns: repeat(6, 0fr);
+    grid-gap: 2px;
+    margin: 0;
+    width: max-content;
+    justify-content: end;
+    padding: 90px 20px 20px;
+    border: 1px solid #000;
+    border-radius: 100px 100px 0 0;
+}
+.container:after {
+    position: absolute;
+    content: 'Driver';
+    width: 80px;
+    height: 25px;
+    background: #70e716;
+    line-height: 25px;
+    text-align: center;
+    font-size: 10px;
+    top: 40px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+}
+
+/* Grid cell styles */
+.cell {
+    width: 25px;
+    height: 25px;
+    /* background-color: lightgray; */
+    border: 1px solid darkgray;
+    text-align: center;
+    line-height: 25px;
+    font-size: 10px;
+    cursor: pointer;
+
+}
