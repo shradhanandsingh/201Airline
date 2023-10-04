@@ -86,14 +86,13 @@
       "gender": "Female",
       "address": "delhi",
       "mobile_no": 6789876545,
-      "seat_no": "D9",
+      "seat_no": "D4",
       "passport": "PASS10002",
       "wheelChair": "No",
       "infant": "No",
       "status": "AC",
       "flight_id": "3",
       "special_meals": [
-        "Dessert"
       ],
       "ancillary": [
         "merchandise"

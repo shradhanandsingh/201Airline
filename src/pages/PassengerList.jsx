@@ -43,7 +43,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-const PassengerList = ({flightId, serviceName, setSeatMap}) => {
+const PassengerList = ({flightId, serviceName, setSeatMap, getMeals}) => {
   const [checked, setChecked] = useState(true)
   
 //pagination
@@ -60,6 +60,7 @@ function handleChangeRowsPerPage(event) {
 //pagination
   const [passenger, setPassenger] = useState([])
   const [bookSeat, setBookSeat] = useState([])
+  const [meals, setMeals] = useState([])
 
   const fetchData = async () => {
     const url = 'http://localhost:3000/passengerList'
@@ -76,20 +77,34 @@ function handleChangeRowsPerPage(event) {
     if(passenger.length > 0){
       let bookedseat = [];
       passenger.forEach((data)=> {
-        if(data.seat_no  != ""){
-          bookedseat.push(data.seat_no)
+        if(data.seat_no  !== ""){
+          bookedseat.push(
+            {seat_no:data.seat_no, meals: data.special_meals}
+            )
         }
       })
       setBookSeat(bookedseat)
       setSeatMap(bookedseat)
     }
   }
+  const getSpecialMeal = ()=>{
+    if(passenger.length > 0){
+      let specialMeals = [];
+      passenger.forEach((data)=> {
+        if(data.special_meals !== ""){
+          specialMeals.push(data.special_meals)
+        }
+      })
+      setMeals(specialMeals)
+      getMeals(specialMeals)
+    }
+  }
   useEffect(() => {
     setChecked(checked)
     fetchData()
     bookedSeatMapping()
-  }, [flightId, serviceName, checked, passenger, bookSeat])
- 
+    getSpecialMeal()
+  }, [flightId, meals])
 
   return (
     <>

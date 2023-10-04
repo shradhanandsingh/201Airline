@@ -39,3 +39,23 @@
     cursor: pointer;
 
 }
+
+.colorIdentify {
+    position: absolute;
+    right: 40px;
+    top: 80px;
+    display: flex;
+}
+.colorIdentify li {
+    display: flex;
+    margin: 0 10px;
+    justify-content: left;
+    align-items: baseline;
+    text-align: left;
+    font-size: 10px;
+}
+.clsName{
+    width: 10px;
+    height: 10px;
+    margin-right: 6px;
+}

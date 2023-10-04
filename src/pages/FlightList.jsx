@@ -34,6 +34,8 @@ const [flightDetails, setFightDetails] = useState([]);
 const [flightId, setFlightId] = useState("");
 const [serviceName, setServiceName] = useState([]);
 const [seatMapping, setSeatMapping]= useState([])
+const [meals, setMeals]= useState([])
+
 
 const flightDetailsList = async()=> {
   try {
@@ -49,8 +51,6 @@ useEffect(()=> {
 }, [])
 
 const handleChangeEvent = (event) => {
-  console.log(event.target.value)
-
   setFlightId(event.target.value)
 
 };
@@ -77,13 +77,14 @@ const handleChange =(event)=>{
             <div>
               <p className="flightTitle"><span>Flights List</span></p>
             </div>
+           
             <Grid
                 style={{padding: "12px" }}
                 container
                 direction="column"
                 justify="space-between"
             >
-                <Grid xs={8} item><FormControl variant="outlined" margin={"normal"}>
+                <Grid xs={8} item={true}><FormControl variant="outlined" margin={"normal"}>
                     <InputLabel id="test-select-label" style={{ top: '2.2em' }}>Flight Details</InputLabel>
                     <Select
                         sx={{ marginTop: 5, width: 250, height: 50 }}
@@ -93,9 +94,6 @@ const handleChange =(event)=>{
                         value={flightId}
                     >
                         {flightDetails && flightDetails.map((row, i) => {
-
-
-                            console.log(row);
                             return (
                                 <MenuItem key={row.flight_id} value={row.flight_id}>
                                     {`${row.flightNo} ${row.fromPlace} - ${row.toPlace}
@@ -140,11 +138,11 @@ const handleChange =(event)=>{
             <Grid container spacing={2}>
               <Grid xs={10}>
               {
-              flightId ?  <PassengerList flightId={flightId} serviceName={serviceName} setSeatMap={setSeatMapping} />: 'Data Not Found'
+              flightId ?  <PassengerList flightId={flightId} serviceName={serviceName} setSeatMap={setSeatMapping} getMeals={setMeals} />: 'Data Not Found'
             }
               </Grid>
               <Grid xs={2}>
-                {flightId && <Seatmap bookedSeat={seatMapping} /> }
+                {flightId && <Seatmap bookedSeat={seatMapping} specialMeal={meals} /> }
                 
               </Grid>
             </Grid>
