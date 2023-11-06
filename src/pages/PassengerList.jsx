@@ -43,7 +43,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-const PassengerList = ({flightId, serviceName, setSeatMap, getMeals}) => {
+const PassengerList = ({flightId, serviceName, setSeatMap, getMeals, setPassengerList}) => {
   const [checked, setChecked] = useState(true)
   
 //pagination
@@ -68,7 +68,7 @@ function handleChangeRowsPerPage(event) {
       const response = await axios.get(`${url}?flight_id=${flightId}${serviceName.length > 0 ? serviceName.map((s) => `&${s}=${checked ? 'Yes' : 'No'}`).join('') : ''}`);
 
       setPassenger(response.data);
-     
+      setPassengerList(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -105,7 +105,6 @@ function handleChangeRowsPerPage(event) {
     bookedSeatMapping()
     getSpecialMeal()
   }, [flightId, meals])
-
   return (
     <>
         <Box style={{ marginTop: '10px' }}>

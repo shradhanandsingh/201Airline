@@ -1,0 +1,17 @@
+.sticky_header {
+    background: #f1f1f1;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+.tablewrapper .MuiContainer-root{
+    padding: 0;
+}
+.MuiTableCell-sizeMedium{
+    white-space: nowrap;
+}
+.ellipse{
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

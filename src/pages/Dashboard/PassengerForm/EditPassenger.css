@@ -1,0 +1,13 @@
+.MuiGrid-grid-xs-4{
+    padding: 0 15px;
+}
+.MuiTextField-root,.MuiFormControl-root{
+    margin-bottom: 15px !important;
+}
+.saveform{
+    margin-top: 15px !important;
+    float: right;
+}
+.edit_form_dashboard .css-1nrlq1o-MuiFormControl-root {
+   width: 100%;
+}

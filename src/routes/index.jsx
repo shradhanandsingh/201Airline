@@ -2,9 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import AppLayout from "../components/layout/AppLayout";
 import LoginPage from "../pages/LoginPage";
 import MainLayout from "../components/layout/MainLayout";
-import DashboardPage from "../pages/DashboardPage";
+import DashboardPage from "../pages/Dashboard/DashboardPage";
 import FlightList from "../pages/FlightList";
 import PassengerDetails from "../pages/PassengerDetail";
+import EditPassenger from "../pages/Dashboard/PassengerForm/EditPassenger";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,9 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <DashboardPage />
+          },{
+            path:"edit/:id",
+            element: <EditPassenger />
           }
         ]
       }

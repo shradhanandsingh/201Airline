@@ -1,71 +1,54 @@
 {
   "flightList": [
     {
-      "flight_id":"1",
-      "flightNo":"f-101",
-      "fromPlace":"HYD",
-      "toPlace":"DL",
+      "flight_id": "1",
+      "flightNo": "f-101",
+      "fromPlace": "HYD",
+      "toPlace": "DL",
       "departureDate": "2019-12-27T09:30:00",
-      "arrivalDate": "2019-12-27T11:30:00"  
+      "arrivalDate": "2019-12-27T11:30:00"
     },
     {
-      "flight_id":"2",
-      "flightNo":"f-103",
-      "fromPlace":"HYD",
-      "toPlace":"BLR",
+      "flight_id": "2",
+      "flightNo": "f-103",
+      "fromPlace": "HYD",
+      "toPlace": "BLR",
       "departureDate": "2019-12-27T22:30:00",
       "arrivalDate": "2019-12-27T23:00:00"
     },
     {
-      "flight_id":"3",
-    "flightNo":"f-106",
-    "fromPlace":"DL",
-    "toPlace":"MUM",
-    "departureDate": "2019-12-27T22:30:00",
-    "arrivalDate": "2019-12-27T23:30:00"
+      "flight_id": "3",
+      "flightNo": "f-106",
+      "fromPlace": "DL",
+      "toPlace": "MUM",
+      "departureDate": "2019-12-27T22:30:00",
+      "arrivalDate": "2019-12-27T23:30:00"
     },
     {
-      "flight_id":"4",
-      "flightNo":"f-106",
-      "fromPlace":"HYD",
-      "toPlace":"CHN",
+      "flight_id": "4",
+      "flightNo": "f-106",
+      "fromPlace": "HYD",
+      "toPlace": "CHN",
       "departureDate": "2019-12-27T22:30:00",
       "arrivalDate": "2019-12-27T23:30:00"
     }
-    
   ],
   "passengerList": [
     {
-      "id": 1,
-      "first_name": "Bhaskar",
-      "last_name": "Zolgiker",
-      "date_of_birth": "4-Aug-1977",
-      "gender": "Male",
-      "address": "Bidar",
-      "mobile_no": 8951407093,
-      "seat_no": "C1",
-      "passport": "PASS10000",
-      "wheelChair": "Yes",
-      "infant": "No",
-      "status": "AC",
-      "flight_id": "1",
-      "special_meals": [
-        "Veg-special",
-        "Biryanis"
-      ],
-      "ancillary": [
-        "vouchers"
-      ]
+      "0": "Coffee",
+      "1": "North-Special",
+      "2": "Biryanis",
+      "id": 1
     },
     {
       "id": 2,
-      "first_name": "Ajit",
+      "first_name": "Ajit Pawar",
       "last_name": "joshi",
       "date_of_birth": "4-Aug-1987",
       "gender": "Male",
       "address": "Bidar",
       "mobile_no": 8951407093,
-      "seat_no": "D2",
+      "seat_no": "D6",
       "passport": "PASS10001",
       "wheelChair": "No",
       "infant": "No",
@@ -92,8 +75,7 @@
       "infant": "No",
       "status": "AC",
       "flight_id": "3",
-      "special_meals": [
-      ],
+      "special_meals": [],
       "ancillary": [
         "merchandise"
       ]

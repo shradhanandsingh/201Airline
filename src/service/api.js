@@ -10,6 +10,9 @@ export const getFlightList = async (id) => {
 export const getPassengerList = async (id)=> {
     return await axios.get(`${url}passengerList?flight_id=${id}`);
 }
+export const getSaetList = async ()=> {
+    return await axios.get(`${url}passengerList?seat_no`);
+}
 
 export const getPassengerSeat = async ()=> {
     return await axios.get(`${url}passengerList`);
@@ -18,4 +21,7 @@ export const getPassengerSeat = async ()=> {
 export const getPassengerId = async (id)=> {
     return await axios.get(`${url + 'passengerList'}/${id}`);
     
+}
+export const updateList = async(id, user)=>{
+    return await axios.put(`${url + 'passengerList'}/${id}`, user)
 }
