@@ -1,0 +1,5 @@
+export const MAKEREQUEST = 'MAKEREQUEST';
+export const FAILREQUEST = 'FAILREQUEST';
+export const GETUSERLIST = "GETUSERLIST";
+export const UPDATEUSER = "UPDATEUSER";
+export const GETUSEROBJ = "GETUSEROBJ";

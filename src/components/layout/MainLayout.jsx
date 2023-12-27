@@ -1,15 +1,24 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Sidebar from '../common/Sidebar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import Header from '../common/Header';
 
 const sidebarWidth = 350;
 
 const MainLayout = () => {
+  let navigate = useNavigate();
+  useEffect(()=>{
+    let username = sessionStorage.getItem('username');
+    if(username === '' || username === null){
+      navigate("/login");
+    }
+  },[]);
   return (
     <Box display="flex">
       {/* sidebar */}
       <Sidebar sidebarWidth={sidebarWidth} />
+      <Header />
       {/* sidebar */}
 
       <Box

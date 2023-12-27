@@ -40,7 +40,6 @@ const PassengerDetails = () => {
     setUser(response.data);
   }
 
-  console.log('dd', user)
 
   return (
     <>
@@ -48,8 +47,11 @@ const PassengerDetails = () => {
         {/* header */}
         <Header />
         {/* header */}
+       
 
         <Box style={{ marginTop: '100px' }}>
+       
+       
           <CssBaseline />
           <Container fixed>
             <Grid container spacing={2}>
@@ -75,7 +77,7 @@ const PassengerDetails = () => {
                             {user.last_name}
                           </StyledTableCell>
                         </TableRow>
-                       
+
                         <TableRow>
                           <StyledTableCell component="th">
                             <b>Date Of Birth</b>
@@ -90,7 +92,7 @@ const PassengerDetails = () => {
                             {user.gender}
                           </StyledTableCell>
                         </TableRow>
-                        
+
                         <TableRow>
                           <StyledTableCell component="th">
                             <b>Mobile No</b>
@@ -105,7 +107,7 @@ const PassengerDetails = () => {
                             {user.passport}
                           </StyledTableCell>
                         </TableRow>
-                       
+
                         <TableRow>
                           <StyledTableCell component="th">
                             <b>Seat No</b>
@@ -120,7 +122,7 @@ const PassengerDetails = () => {
                             {user.infant}
                           </StyledTableCell>
                         </TableRow>
-                       
+
                         <TableRow>
                           <StyledTableCell component="th">
                             <b>Ancillary</b>
@@ -132,10 +134,10 @@ const PassengerDetails = () => {
                             <b>Special Meals</b>
                           </StyledTableCell>
                           <StyledTableCell>
-                           {user.special_meals}
+                            {user.special_meals}
                           </StyledTableCell>
                         </TableRow>
-                      
+
                         <TableRow>
                           <StyledTableCell component="th">
                             <b>Status</b>
@@ -150,14 +152,14 @@ const PassengerDetails = () => {
                             {user.wheelChair}
                           </StyledTableCell>
                         </TableRow>
-                       
+
                       </TableBody>
                     </Table>
                   </Animate>
                 </TableContainer>
-                <br/>
+                <br />
               </Grid>
-             
+
             </Grid>
           </Container>
         </Box>

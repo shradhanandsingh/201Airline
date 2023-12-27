@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import { styled } from '@mui/material/styles';
@@ -14,11 +14,22 @@ import Paper from '@mui/material/Paper';
 import Animate from "../../components/common/Animate";
 import { Link } from 'react-router-dom';
 import Checkbox from '@mui/material/Checkbox';
-//import { getPassengerList } from "../service/api";
-import axios from "axios";
+import './Dashboard.css';
+import { FetchUserList } from "../../components/redux/action/Action";
+import { connect } from "react-redux";
+import { CSVLink} from "react-csv";
 
-
-
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -42,40 +53,49 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-const PassengerAdmin = ({ setPassengerList }) => {
+const PassengerAdmin = (props) => {
   const [checked, setChecked] = useState(true)
-
   //pagination
   const [pg, setpg] = React.useState(0);
   const [rpg, setrpg] = React.useState(5);
+  const [passenger, setPassenger] = useState([])
+
+
   function handleChangePage(event, newpage) {
     setpg(newpage);
   }
-
   function handleChangeRowsPerPage(event) {
     setrpg(parseInt(event.target.value, 10));
     setpg(0);
   }
-  //pagination
-  const [passenger, setPassenger] = useState([])
-
-  const fetchData = async () => {
-    const url = 'http://localhost:3000/passengerList'
-    try {
-      const response = await axios.get(`${url}`);
-
-      setPassenger(response.data);
-      setPassengerList(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  
+  const handleOpen = (e) => {
+    const deleteUp = delete e.special_meals;
+    return deleteUp
+    //let updatespecialmeal = delete e.special_meals;
+    
+   
+  }
+ 
+ 
 
 
   useEffect(() => {
     setChecked(checked)
+    props.loaduser();
     fetchData()
   }, [])
+
+  const fetchData = async () => {
+    try {
+      const response = await props.user.userlist;
+
+      setPassenger(response);
+  //    setPassengerList(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   const serviceList = [
     'Passport',
     'Address',
@@ -91,7 +111,6 @@ const PassengerAdmin = ({ setPassengerList }) => {
     }
   }
 
-
   return (
     <>
       <Box style={{ marginTop: '10px' }}>
@@ -99,13 +118,16 @@ const PassengerAdmin = ({ setPassengerList }) => {
         <div className="sticky_header">
           <Animate type="fade" delay={0.5}>
             {
-              serviceList.map((el) => (
+              serviceList?.map((el) => (
                 <label>
                   <Checkbox value={el} name='filter' onClick={handleClick} /> {el}
                 </label>
               ))
             }
+
+
           </Animate>
+         
         </div>
 
 
@@ -113,7 +135,7 @@ const PassengerAdmin = ({ setPassengerList }) => {
           <>
             <TableContainer component={Paper}>
               <Animate type="fade" delay={0.5}>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <Table sx={{ minWidth: 700 }} aria-label="customized table" className="passengerTable">
                   <TableHead>
                     <TableRow>
                       <StyledTableCell>First Name</StyledTableCell>
@@ -129,13 +151,15 @@ const PassengerAdmin = ({ setPassengerList }) => {
                       <StyledTableCell>Address</StyledTableCell>
                       <StyledTableCell>Special meal</StyledTableCell>
                       <StyledTableCell>Ancillary</StyledTableCell>
-                      <StyledTableCell></StyledTableCell>
+                      <StyledTableCell>
+                      <CSVLink data={passenger} className="export">Export File</CSVLink>
+                      </StyledTableCell>
                     </TableRow>
                   </TableHead>
 
                   <TableBody>
                     {
-                      passenger.slice(pg * rpg, pg * rpg + rpg).map((user) => (
+                      passenger.slice(pg * rpg, pg * rpg + rpg)?.map((user) => (
 
                         <StyledTableRow key={user.id}>
                           <StyledTableCell component="th">
@@ -172,24 +196,24 @@ const PassengerAdmin = ({ setPassengerList }) => {
                             {user.address}
                           </StyledTableCell>
                           <StyledTableCell>
-                          <div className="ellipse">
-                            {
-                              user.special_meals.map((sm,i)=>(
-                                <span key={i}>
-                                  {(i ? ', ':'')+ sm}
-                                </span>
-                              ))
-                            }
+                            <div className="ellipse">
+                              {
+                                user.special_meals?.map((sm, i) => (
+                                  <span key={i}>
+                                    {(i ? ', ' : '') + sm}
+                                  </span>
+                                ))
+                              }
                             </div>
                           </StyledTableCell>
                           <StyledTableCell>
-                           <div className="ellipse">
-                           {
-                              user.ancillary.map((data,i)=>(
-                                <span key={i}>{(i? ', ':'')+ data}</span>
-                              ))
-                            }
-                           </div>
+                            <div className="ellipse">
+                              {
+                                user.ancillary?.map((data, i) => (
+                                  <span key={i}>{(i ? ', ' : '') + data}</span>
+                                ))
+                              }
+                            </div>
                           </StyledTableCell>
                           <StyledTableCell align="right">
                             <Link to={`/dashboard/edit/${user.id}`} className="ViewFareBtn">Edit</Link>
@@ -197,9 +221,7 @@ const PassengerAdmin = ({ setPassengerList }) => {
                         </StyledTableRow>
                       ))
                     }
-
                   </TableBody>
-
                 </Table>
               </Animate>
             </TableContainer>
@@ -219,4 +241,15 @@ const PassengerAdmin = ({ setPassengerList }) => {
   );
 };
 
-export default PassengerAdmin;
+const mapStateToProps=(state)=>{
+  return{
+    user:state.user
+  }
+}
+const mapDispatchProps=(dispatch)=>{
+  return{
+    loaduser:()=> dispatch(FetchUserList())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchProps) (PassengerAdmin);

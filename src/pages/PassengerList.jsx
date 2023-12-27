@@ -105,6 +105,8 @@ function handleChangeRowsPerPage(event) {
     bookedSeatMapping()
     getSpecialMeal()
   }, [flightId, meals])
+
+  console.log('bookSeat',bookSeat)
   return (
     <>
         <Box style={{ marginTop: '10px' }}>
@@ -113,7 +115,7 @@ function handleChangeRowsPerPage(event) {
             <>
               <TableContainer component={Paper}>
                 <Animate type="fade" delay={0.5}>
-                  <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                  <Table className="passengerTable" sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
                       <TableRow>
                         <StyledTableCell>First Name</StyledTableCell>
@@ -172,7 +174,22 @@ function handleChangeRowsPerPage(event) {
                             {user.address}
                             </StyledTableCell>
                             <StyledTableCell>
-                            {user.special_meals[0]}
+                            {
+                                user.special_meals?.map((sm, i) => (
+                                  <span key={i}>
+                                    {(i ? ', ' : '') + sm}
+                                  </span>
+                                ))
+                              }
+                            </StyledTableCell>
+                            <StyledTableCell>
+                            {
+                                user.ancillary?.map((sm, i) => (
+                                  <span key={i}>
+                                    {(i ? ', ' : '') + sm}
+                                  </span>
+                                ))
+                              }
                             </StyledTableCell>
                             <StyledTableCell align="right">
                             <Link to={`/passenger_list/${user.id}`} className="ViewFareBtn">View Details</Link>

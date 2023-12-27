@@ -7,6 +7,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './App.css';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Legend, Tooltip, BarElement);
 
 function App() {
@@ -19,9 +20,11 @@ function App() {
 
   return (
     <>
-      <CssBaseline />
-      <GlobalStyles styles={globalStyles} />
-      <RouterProvider router={router} />
+       <GoogleOAuthProvider clientId="466958440700-un3vfa4je9vejult4289v4pfff09932f.apps.googleusercontent.com">
+          <CssBaseline />
+          <GlobalStyles styles={globalStyles} />
+          <RouterProvider router={router} />
+        </GoogleOAuthProvider>
     </>
   );
 }

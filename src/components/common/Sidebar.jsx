@@ -2,19 +2,21 @@ import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Typography, colors } from '@mui/material';
 import { images } from "../../assets";
 import Animate from "./Animate";
+import { Link } from 'react-router-dom';
 
 const menus = [
   {
     title: "Inbox",
     icon: <MailOutlinedIcon />,
-    state: "inbox"
+    state: "inbox",
+    links:"dashboard"
   }
 ];
 
 
 const Sidebar = ({ sidebarWidth }) => {
   const activeState = "overview";
-
+  
   // const container = window !== undefined ? () => window.document.body : undefined;
 
   const MenuItem = (props) => {
@@ -37,7 +39,7 @@ const Sidebar = ({ sidebarWidth }) => {
           </ListItemIcon>
           <ListItemText primary={
             <Typography fontWeight={600}>
-              {props.item.title}
+              <Link>{props.item.title}</Link>
             </Typography>
           } />
         </ListItemButton>
@@ -85,11 +87,12 @@ const Sidebar = ({ sidebarWidth }) => {
                 key={index}
                 item={item}
                 isActive={item.state === activeState}
+                to={item.links}
               />
             ))}
           </List>
           {/* menu group 1 */}
-
+         
 
          
         </Paper>

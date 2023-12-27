@@ -8,6 +8,9 @@
     margin-top: 15px !important;
     float: right;
 }
+.edit_form_dashboard{
+    margin-top: 110px;
+}
 .edit_form_dashboard .css-1nrlq1o-MuiFormControl-root {
    width: 100%;
 }

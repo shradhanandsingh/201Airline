@@ -11,6 +11,7 @@ import moment from 'moment'
 import { getFlightList } from "../service/api";
 import PassengerList from "./PassengerList";
 import Seatmap from "./SeatMap";
+import toastr from "toastr";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -36,7 +37,7 @@ const FlightList = () => {
   const [seatMapping, setSeatMapping] = useState([])
   const [meals, setMeals] = useState([])
   const [passengerList, setPassengerList] = useState([])
-  const [wheelchair, setWheelChair] = useState('')
+ // const [wheelchair, setWheelChair] = useState('')
 
   let passengerMappedSeat = passengerList.map((passenger) => {
     return {
@@ -64,7 +65,7 @@ const FlightList = () => {
 
   const handleChangeEvent = (event) => {
     setFlightId(event.target.value)
-
+    toastr.success('Append Fight Details')
   };
 
   const handleChange = (event) => {
@@ -153,7 +154,18 @@ const FlightList = () => {
             <Grid container spacing={2}>
               <Grid xs={10}>
                 {
-                  flightId ? <PassengerList flightId={flightId} serviceName={serviceName} setSeatMap={setSeatMapping} getMeals={setMeals} setPassengerList={setPassengerList} /> : 'Data Not Found'
+                  flightId ? <PassengerList flightId={flightId} serviceName={serviceName} setSeatMap={setSeatMapping} getMeals={setMeals} setPassengerList={setPassengerList} /> : 
+                  <div className="datanotfound">
+                    <div>
+                      <h2>Data Not Found</h2>
+                    </div>
+                    <div>
+                    {/* https://www.seekahost.com/wp-content/uploads/2017/11/404-page-not-found.jpg */}
+                       {/* <img src="https://ugokawaii.com/wp-content/uploads/2023/04/plane.gif" /> */}
+                       <img src="https://i.pinimg.com/originals/ce/c4/79/cec4795ab42ec0c616409e791063d7f9.gif" /> 
+                    </div>
+                    
+                  </div>
                 }
               </Grid>
               <Grid xs={2}>

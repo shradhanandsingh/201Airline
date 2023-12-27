@@ -13,6 +13,9 @@ import { Button, Input } from "@mui/material";
 import Checkbox from '@mui/material/Checkbox';
 import ListItemText from '@mui/material/ListItemText';
 import { getPassengerId, getPassengerSeat, updateList } from "../../../service/api";
+import toastr from "toastr";
+import { FetchUserList } from "../../../components/redux/action/Action";
+import { connect } from "react-redux";
 
 const initialState = {
     first_name: '',
@@ -32,20 +35,23 @@ const initialState = {
 
 
 
+//https://github.com/nihira2020/reduxcrud/blob/master/src/Component/Updateuser.js
 
-const EditPassenger = () => {
+
+const EditPassenger = (props) => {
     const [user, setUser] = useState(initialState);
     const { first_name, last_name, date_of_birth, address, mobile_no, seat_no, passport, wheelChair, infant, status, gender, special_meals, ancillary } = user;
     const { id } = useParams();
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const [SeattAvailble, SetSeatAvailable] = useState([]);
-    const [fetchBookedSeat, setFetchBookedSeat] = useState([]);
+ //const [fetchBookedSeat, setFetchBookedSeat] = useState();
     const [bookSeat, setBookSeat] = useState([])
+    const [passenger, setPassenger] = useState([])
     const numberOfrows = 26;
     const numCols = 6;
     const seatList = [];
-
+  //let reservedSeat=[];
     const navigate = useNavigate();
     const Special_Meals = ["Veg-special", "Coffee", "North-Special", "Non-veg-meal", "Biryanis", "Alcohol", "Maggie", "Dessert"];
     const Ancillaries = ['vouchers', 'merchandise', 'Tv', 'BaggageAllowance', 'Movie', 'Student Discount'];
@@ -53,8 +59,21 @@ const EditPassenger = () => {
         loadingData();
         fetchingSeat();
         bookedSeatMapping();
+        props.loaduser();
+        fetchData();
     }, [id])
-
+    
+    const fetchData = async () => {
+        try {
+          const response = await props.user.userlist;
+    
+          setPassenger(response);
+      //    setPassengerList(response.data);
+           
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
     const onValuechange = (e) => {
         setUser({
             ...user,
@@ -77,22 +96,24 @@ const EditPassenger = () => {
         }
     }
     const bookedSeatMapping = async() => {
-        const result = await getPassengerSeat();
-        setFetchBookedSeat(result.data);
-        if (fetchBookedSeat.length > 0) {
-            let bookedseat = [];
-            fetchBookedSeat.forEach((data) => {
-                if (data.seat_no !== "") {
-                    bookedseat.push(
-                        data.seat_no
-                    )
-                }
-            })
-            setBookSeat(bookedseat)
-        }
+        let bookedseat = [];
+        passenger.forEach((data)=> {
+            if(data.seat_no  !== ""){
+              bookedseat.push(
+                {seat_no:data.seat_no}
+                )
+                setBookSeat(bookedseat);
+            }
+          })
+          let bookmyseat=[]
+          bookSeat.forEach((data)=>{
+            bookmyseat.push(data.seat_no)
+          })
+       console.log('t', bookmyseat)
     }
     const onSubmit = async () => {
         await updateList(id, user);
+        toastr.success('Update Successfully')
         navigate('/dashboard')
     }
 
@@ -104,7 +125,6 @@ const EditPassenger = () => {
             },
         },
     };
-
 
     return (
         <>
@@ -131,7 +151,7 @@ const EditPassenger = () => {
                                 <Grid xs={4}>
                                     <FormControl>
                                         <InputLabel>Date Of Birth</InputLabel>
-                                        <Input onChange={(e) => onValuechange(e)}
+                                        <Input type="date" onChange={(e) => onValuechange(e)}
                                             name="date_of_birth" value={date_of_birth} />
 
                                     </FormControl>
@@ -181,7 +201,7 @@ const EditPassenger = () => {
                                             <MenuItem value="default" disabled="true">--Select--</MenuItem>
                                             {
                                                 SeattAvailble.map((data, i) => (
-                                                    <MenuItem key={i} value={data}>{data}</MenuItem>
+                                                    <MenuItem key={i} value={data} disabled={bookSeat === data ? true :false}>{data}</MenuItem>
                                                 ))
                                             }
                                         </Select>
@@ -307,5 +327,14 @@ const EditPassenger = () => {
         </>
     )
 }
-
-export default EditPassenger;
+const mapStateToProps=(state)=>{
+    return{
+      user:state.user
+    }
+  }
+  const mapDispatchProps=(dispatch)=>{
+    return{
+      loaduser:()=> dispatch(FetchUserList())
+    }
+  }
+export default connect(mapStateToProps, mapDispatchProps) (EditPassenger);

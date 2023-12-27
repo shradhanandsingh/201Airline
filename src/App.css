@@ -1,3 +1,4 @@
+@import 'toastr';
 .css-1joxlaw-MuiPaper-root{
     background-color: transparent !important;
 }
@@ -10,4 +11,20 @@
 .css-1l0jb83{
     background-color: #fff;
     padding: 10px;
+}
+.googleBtn{
+    margin: 0 auto;
+}
+.passengerTable thead tr th:last-child, .passengerTable tbody tr td:last-child{
+    position: sticky;
+    top: 0px;
+    background-color: #303031;
+    right: -1px;
+}
+.passengerTable tbody tr td:last-child{
+    background-color: #fff;
+}
+.icon-temp{
+    display: flex;
+    align-items: center;
 }

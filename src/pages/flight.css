@@ -8,3 +8,12 @@
 .css-2m9kme-MuiFormControl-root {
     vertical-align: bottom !important;
 }
+.datanotfound{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.datanotfound img{
+    width: 70px;
+    margin-left: 15px;
+}
